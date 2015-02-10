@@ -161,6 +161,8 @@ class Modell
 	 */
 	public function getTableName() {
 		$table = strtolower(get_called_class());
+		if ($table == 'person')
+			return 'people';
 		switch (substr($table, -1)) {
 			case 'y': return substr($table, 0, -1) . 'ies';
 			case 's': return $table . 'es';
