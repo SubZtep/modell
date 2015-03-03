@@ -37,7 +37,7 @@ class User extends Modell {
 Run a simple query
 
 ```
-$query = self::$pdo->prepare($sql);
+$query = Modell::$pdo->prepare($sql);
 ```
 
 
