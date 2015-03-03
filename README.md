@@ -5,6 +5,7 @@ Simple model class for create/update/load data
 
 > Under development
 
+
 ## Data table rules
 
 - Primary key is auto incremented `id`
@@ -16,11 +17,10 @@ Simple model class for create/update/load data
 Connect to database
 
 ```
-use Modell\Modell;
 Modell::$pdo = new PDO('mysql:host=HOST;dbname=DBNAME', 'USER', 'PASS');
 ```
 
-Connect to memcache, if you want
+Connect to memcache (optional)
 
 ```
 Modell::$memcache = new Memcache;
@@ -33,6 +33,13 @@ Create table `users` with primary key `id`, and model
 class User extends Modell {
 }
 ```
+
+Run a simple query
+
+```
+$query = self::$pdo->prepare($sql);
+```
+
 
 ## Examples
 
