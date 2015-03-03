@@ -2,7 +2,6 @@
 /**
  * https://github.com/SubZtep/modell
  */
-namespace Modell;
 
 class Modell
 {

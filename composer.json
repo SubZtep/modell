@@ -1,3 +1,8 @@
 {
-  "name": "subztep/modell"
+  "name": "subztep/modell",
+  "autoload": {
+    "psr-0": {
+      "Modell": ""
+    }
+  }
 }
