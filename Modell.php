@@ -17,6 +17,8 @@ class Modell
 	public $fieldCreatedAt = 'created_at'; // Created datetime column or false
 	public $fieldUpdatedAt = 'updated_at'; // Updated datetime column or false
 
+	public $modified = false; // Any object property has been updated (for save)
+
 	/**
 	 * [__construct description]
 	 * @param [type]  $id         [description]
@@ -31,6 +33,8 @@ class Modell
 
 		if (! is_null($id))
 			$this->load($id);
+
+		$this->modified = false;
 	}
 
 	/**
@@ -39,6 +43,8 @@ class Modell
 	 * @param [type] $value
 	 */
 	public function __set($name, $value) {
+		if (!$this->modified && (!isset($this->values[$name]) || $this->values[$name] !== $value))
+			$this->modified = true;
 		$this->values[$name] = $value;
 	}
 
@@ -82,6 +88,8 @@ class Modell
 
 		if ($this->fieldUpdatedAt && isset($this->schema[$this->fieldUpdatedAt]))
 			$this->values[$this->fieldUpdatedAt] = date('Y-m-d H:i:s');
+		else if (!$this->modified)
+			return true;
 
 		// Prepare sql
 		if (is_null($this->id)) {
@@ -119,6 +127,7 @@ class Modell
 		if ($query->execute()) {
 			if (is_null($this->id))
 				$this->id = self::$pdo->lastInsertId();
+			$this->modified = false;
 			return true;
 		}
 		return false;
