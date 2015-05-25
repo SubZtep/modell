@@ -10,7 +10,7 @@ A PHP class for easily create/update/load database entries. All you need to do i
 
 Extend your `composer.json` file with the following:
 
-```
+```json
 {
   "repositories": [{
     "type": "vcs",
