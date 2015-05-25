@@ -12,10 +12,6 @@ Extend your `composer.json` file with the following:
 
 ```json
 {
-  "repositories": [{
-    "type": "vcs",
-    "url": "git@github.com:SubZtep/modell.git"
-  }],
   "require": {
     "subztep/modell": "dev-master"
   }
