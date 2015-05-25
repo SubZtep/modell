@@ -41,7 +41,7 @@ Connect to database
 Modell::$pdo = new PDO('mysql:host=HOST;dbname=DBNAME;charset=utf8', 'USER', 'PASS');
 ```
 
-Connect to memcache *optional*. If connected, *Modell* cache your table's column details and make it faster.
+Connect to memcache is *optional*. If connected, *Modell* cache your table's column details and make it faster.
 
 ```php
 Modell::$memcache = new Memcache;
