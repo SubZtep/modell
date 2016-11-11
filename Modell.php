@@ -187,6 +187,11 @@ class Modell
 		return $table . 's';
 	}
 
+
+	public function isExists() {
+		return $this->id != null;
+	}
+
 	private function camelize($str) {
 		return str_replace('_', '', lcfirst(ucwords($str, '_')));
 	}
