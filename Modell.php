@@ -43,6 +43,7 @@ class Modell
 	 * @param [type] $value
 	 */
 	public function __set($name, $value) {
+		$name = $this->decamelize($name);
 		if (!$this->modified && (!isset($this->values[$name]) || $this->values[$name] !== $value))
 			$this->modified = true;
 		$this->values[$name] = $value;
@@ -54,6 +55,7 @@ class Modell
 	 * @return [type]
 	 */
 	public function __get($name) {
+		$name = $this->decamelize($name);
 		if (isset($this->values[$name]))
 			return $this->values[$name];
 		return null;
@@ -169,6 +171,13 @@ class Modell
 	 */
 	public function getTableName() {
 		$table = strtolower(get_called_class());
+		
+		// For namespaces
+		$rpos = strrpos($table, '\\');
+		if ($rpos) {
+			$table = substr($table, $rpos+1);
+		}
+
 		if ($table == 'person')
 			return 'people';
 		switch (substr($table, -1)) {
@@ -176,6 +185,14 @@ class Modell
 			case 's': return $table . 'es';
 		}
 		return $table . 's';
+	}
+
+	private function camelize($str) {
+		return str_replace('_', '', lcfirst(ucwords($str, '_')));
+	}
+
+	private function decamelize($str) {
+		return strtolower(preg_replace('/(?<!^)[A-Z]+/', '_$0', $str));
 	}
 }
 ?>
